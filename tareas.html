@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>Controladoeres</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="js/tareas.js"></script>
+</head>
+
+<body ng-app="todoAp">
+    <h2>Lista de Canciones</h2>
+    <div ng-controller="Controlador as ctrl">
+        <span>{{restantes()}} de {{ctrl.musicas.length}}</span>
+        <a href="#" class="btn btn-danger btn" ng-click="ctrl.eliminar()">
+            <span class="glyphicon glyphicon-remove"></span> Eliminar
+        </a>
+        <ul class="unstyled">
+            <li ng-repeat="tarea in ctrl.musicas">
+                <input type="checkbox" ng-model="tarea.hecho">
+                <span ng-click="ctrl.mostrarCanciones($index+1)"><b>Nombre: </b>{{tarea.Nombre}}</span>
+                <span ng-click="ctrl.mostrarCanciones($index+1)"><b>Genero: </b>{{tarea.Genero}}</span>
+            </li>
+        </ul>
+        <form>
+            <input type="texto" placeholder="Agregar una nueva cancion" ng-model="ctrl.nombre">
+            <select ng-model="ctrl.genero">
+                <option value="Reguetón">Reguetón</option>
+                <option value="Pop">Pop</option>
+                <option value="Rock">Rock</option>
+                <option value="Clásica">Clásica</option>
+                <option value="Jazz">Jazz</option>
+            </select>
+            <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarMusica()">Agregar</button>
+        </form>
+    </div>
+    <div>
+    </div>
+</body>
+
+</html>

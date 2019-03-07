@@ -1,0 +1,53 @@
+{
+  "Canciones": [
+    {
+      "ID": "1",
+      "Nombre": "Bill Eat",
+      "Autor": "M. Jackson",
+      "Genero": "Pop",
+      "Duracion": "5:20"
+    },
+    {
+      "ID": "2",
+      "Nombre": "Mia",
+      "Autor": "Bad Bunny",
+      "Genero": "Reguetón",
+      "Duracion": "3:30"
+    },
+    {
+      "ID": "3",
+      "Nombre": "Pa' Llamar tu atención",
+      "Autor": "C. Tangana",
+      "Genero": "Reguetón",
+      "Duracion": "2:58"
+    },
+    {
+      "ID": "4",
+      "Nombre": "Bangarang",
+      "Autor": "Skrillex",
+      "Genero": "Electrónica",
+      "Duracion": "3:39"
+    },
+    {
+      "ID": "5",
+      "Nombre": "A prueba de ti",
+      "Autor": "Malú",
+      "Genero": "Pop",
+      "Duracion": "3:29"
+    },
+    {
+      "ID": "6",
+      "Nombre": "El circulo",
+      "Autor": "KSO",
+      "Genero": "Rap",
+      "Duracion": "5:29"
+    },
+    {
+      "ID": "6",
+      "Nombre": "Deseo más y mas",
+      "Autor": "La Union",
+      "Genero": "Pop",
+      "Duracion": "3:32"
+    }
+  ]
+}
