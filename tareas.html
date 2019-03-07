@@ -2,47 +2,102 @@
 
 <head>
     <title>Controladoeres</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Boostrap 4  START-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Boostrap 4 FINISH-->
 
+
+    <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
     <script src="js/tareas.js"></script>
 </head>
 
-<body ng-app="todoAp">
-    <h2>Lista de Canciones</h2>
-    <div ng-controller="Controlador as ctrl">
-        <span>{{restantes()}} de {{ctrl.musicas.length}}</span>
-        <a href="#" class="btn btn-danger btn" ng-click="ctrl.eliminar()">
-            <span class="glyphicon glyphicon-remove"></span> Eliminar
-        </a>
-        <ul class="unstyled">
-            <li ng-repeat="tarea in ctrl.musicas">
-                <input type="checkbox" ng-model="tarea.hecho">
-                <span ng-click="ctrl.mostrarCanciones($index+1)"><b>Nombre: </b>{{tarea.Nombre}}</span>
-                <span ng-click="ctrl.mostrarCanciones($index+1)"><b>Genero: </b>{{tarea.Genero}}</span>
-            </li>
-        </ul>
-        <form>
-            <input type="texto" placeholder="Agregar una nueva cancion" ng-model="ctrl.nombre">
-            <select ng-model="ctrl.genero">
-                <option value="Reguetón">Reguetón</option>
-                <option value="Pop">Pop</option>
-                <option value="Rock">Rock</option>
-                <option value="Clásica">Clásica</option>
-                <option value="Jazz">Jazz</option>
-            </select>
-            <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarMusica()">Agregar</button>
-        </form>
+<body ng-app="todoAp" class="container">
+    <div class="row">
+
+        <div class="col-md-2 bg-info d-flex flex-column">
+            <div class="col">
+                <img src="img/CANCIONES.png">
+            </div>
+            <div class="col">
+                <img src="img/lista.png">
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+            <h2>Lista de Canciones</h2>
+            <div ng-controller="Controlador as ctrl">
+                <span>Total: {{ctrl.musicas.length}}</span>
+                <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar()">Eliminar</button>
+                <ul class="nav flex-column">
+                    <li ng-repeat="tarea in ctrl.musicas">
+                        <input type="checkbox" ng-model="tarea.hecho">
+                        <span ng-click="ctrl.mostrarCanciones(tarea.num_canciones)"><b>Nombre: </b>{{tarea.Nombre}}</span>
+                        <span ng-click="ctrl.mostrarCanciones(tarea.num_canciones)"><b>Genero: </b>{{tarea.Genero}}</span>
+                    </li>
+                </ul>
+                <br>
+
+                <form class="form-inline">
+                    <div class="form-group d-flex flex-column">
+                        <label for="usr">Nombre cancion:</label>
+                        <input type="text" class="form-control" id="usr" ng-model="ctrl.nombre">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="sel1">Seleccionar género:</label>
+                        <select class="form-control" id="sel1" ng-model="ctrl.genero">
+                            <option value="Reguetón">Reguetón</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Clásica">Clásica</option>
+                            <option value="Jazz">Jazz</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarMusica()">Agregar</button>
+                </form>
+            </div>
+            <br>
+            <div ng-controller="Controlador as ctrl">
+                <h2>Todas las canciones</h2>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" ng-click="ctrl.order('Nombre')">Nombre</th>
+                            <th scope="col" ng-click="ctrl.order('Autor')">Autor</th>
+                            <th scope="col" ng-click="ctrl.order('Genero')">Genero</th>
+                            <th  ng-click="ctrl.order('Duracion')">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="form-group col-lg-3">
+                            <label for="usr">Name:</label>
+                            <input type="text" class="form-control" id="usr" ng-model="cancion">
+                        </div>
+                        <tr ng-repeat="x in ctrl.musicas | orderBy:order | filter : cancion">
+                            <td>{{x.Nombre}}</td>
+                            <td>{{x.Autor}}</td>
+                            <td>{{x.Genero}}</td>
+                            <td>{{x.Duracion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
-    <div>
-    </div>
+
 </body>
 
 </html>
