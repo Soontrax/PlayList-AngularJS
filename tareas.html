@@ -26,11 +26,14 @@
     <div class="row">
 
         <div class="col-md-2 bg-info d-flex flex-column">
-            <div class="col">
+            <div class="col mt-5">
                 <img src="img/CANCIONES.png">
             </div>
-            <div class="col">
+            <div class="col mt-5">
                 <img src="img/lista.png">
+            </div>
+            <div class="col">
+                <img src="img/bbdd_canciones.png">
             </div>
 
         </div>
@@ -81,8 +84,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <div class="form-group col-lg-3">
-                            <label for="usr">Name:</label>
+                        <div class="form-group col-lg-4">
+                            <label for="usr">Nombre canción:</label>
                             <input type="text" class="form-control" id="usr" ng-model="cancion">
                         </div>
                         <tr ng-repeat="x in ctrl.musicas | orderBy:ctrl.myOrder | filter : cancion">
@@ -93,6 +96,9 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar5()">-5</button>
+                <button type="button" class="btn btn-success" ng-click="ctrl.agregar5()">+5</button>
 
             </div>
         </div>

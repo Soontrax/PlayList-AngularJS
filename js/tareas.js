@@ -145,10 +145,18 @@ angular.module('todoApp', [])
             alert("mostrar canciones del indice: " + index);
         };
 
+        ctrl.eliminar5 = function () {
+            alert("Ahora eliminaremos 5 canciones menos");
+        };
+
+        ctrl.agregar5 = function () {
+            alert("Ahora agregaremos 5 canciones mas");
+        };
+
         ctrl.eliminar = function () {
-            var tareasViejas = ctrl.musicas;
+            var eliminar_cancion = ctrl.musicas;
             ctrl.musicas = [];
-            angular.forEach(tareasViejas, function (tarea) {
+            angular.forEach(eliminar_cancion, function (tarea) {
                 if (!tarea.hecho) ctrl.musicas.push(tarea);
             });
         };
