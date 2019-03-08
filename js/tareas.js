@@ -1,6 +1,5 @@
-angular.module('todoAp', [])
+angular.module('todoApp', [])
     .controller('Controlador', ['$scope', function ($scope) {
-
         var ctrl = this;
 
         ctrl.musicas = [{
@@ -121,8 +120,8 @@ angular.module('todoAp', [])
 
         ];
 
-        $scope.order = function (x) {
-            $scope.order = x;
+        ctrl.order = function (x) {
+            ctrl.myOrder = x;
         }
 
         ctrl.agregarMusica = function () {

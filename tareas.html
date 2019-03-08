@@ -22,7 +22,7 @@
     <script src="js/tareas.js"></script>
 </head>
 
-<body ng-app="todoAp" class="container">
+<body ng-app="todoApp" class="container">
     <div class="row">
 
         <div class="col-md-2 bg-info d-flex flex-column">
@@ -77,7 +77,7 @@
                             <th scope="col" ng-click="ctrl.order('Nombre')">Nombre</th>
                             <th scope="col" ng-click="ctrl.order('Autor')">Autor</th>
                             <th scope="col" ng-click="ctrl.order('Genero')">Genero</th>
-                            <th  ng-click="ctrl.order('Duracion')">Duración</th>
+                            <th ng-click="ctrl.order('Duracion')">Duración</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,7 +85,7 @@
                             <label for="usr">Name:</label>
                             <input type="text" class="form-control" id="usr" ng-model="cancion">
                         </div>
-                        <tr ng-repeat="x in ctrl.musicas | orderBy:order | filter : cancion">
+                        <tr ng-repeat="x in ctrl.musicas | orderBy:ctrl.myOrder | filter : cancion">
                             <td>{{x.Nombre}}</td>
                             <td>{{x.Autor}}</td>
                             <td>{{x.Genero}}</td>
