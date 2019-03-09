@@ -1,66 +1,146 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Playlist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Controladoeres</title>
 
-    <!--BOOSTRAP 4-->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- Boostrap 4  START-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Boostrap 4 FINISH-->
 
 
-    <!--Angular JS-->
+    <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-    <script src="js/index.js"></script>
+    <script src="js/tareas.js"></script>
 </head>
 
-<body>
+<body ng-app="todoApp" class="container" ng-controller="Controlador as ctrl">
+    <div class="row">
 
-    <div ng-app="Main">
-
-        <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
-            <!-- Brand/logo -->
-            <a class="navbar-brand" href="#/!">
-                <img src="img/logo-musica.png" alt="logo" style="width:80px;">
-            </a>
-
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#!playlist">PlayList</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!canciones">Canciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="container-fluid">
-            <h3>Brand / Logo</h3>
-            <p>When using the .navbar-brand class on images, Bootstrap 4 will automatically style the image to fit the
-                navbar.</p>
-        </div>
-
-        <div ng-view></div>
-        
-        <div ng-controller="songsJSON">
+        <div class="col-md-2 bg-info d-flex flex-column">
+            <div class="col mt-5">
+                <a href="" ng-click="canciones=!canciones">
+                    <img src="img/CANCIONES.png">
+                </a>
+            </div>
+            <div class="col mt-5">
+                <a href="" ng-click="lista=!lista">
+                    <img src="img/lista.png">
+                </a>
+            </div>
+            <div class="col">
+                <img src="img/bbdd_canciones.png">
+            </div>
 
         </div>
 
+        <div class="col-md-8">
+            <div ng-show="lista">
+                <h2>PlayLists</h2>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Nº canciones</th>
+                            <th scope="col">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="form-inline mb-5">
+                            <label for="usr">Añadir Playlist: </label>
+                            <input type="text" class="form-control" ng-model="ctrl.lista">
+                            <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarLista()">Añadir</button>
+                        </div>
+                        <tr ng-repeat="i in ctrl.playlist">
+                            <td>{{i.ID}}</td>
+                            <td>{{i.Nombre}}</td>
+                            <td>{{ctrl.playlist.length}}</td>
+                            <td>{{i.Duracion}}</td>
+                            <td></td>
+                            <button class="btn btn-primary" ng-click="canciones=!canciones">Show Songs</button>
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar5()">Delete playlist</button>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div ng-show="canciones">
+                <h2>Lista de Canciones de Musica TOP</h2>
+                <span>Total: {{ctrl.musicas.length}}</span>
+                <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar()">Eliminar</button>
+                <ul class="nav flex-column">
+                    <li ng-repeat="tarea in ctrl.musicas">
+                        <input type="checkbox" ng-model="tarea.hecho">
+                        <span ng-click="ctrl.mostrarCanciones(tarea.num_canciones)"><b>Nombre: </b>{{tarea.Nombre}}</span>
+                        <span ng-click="ctrl.mostrarCanciones(tarea.num_canciones)"><b>Genero: </b>{{tarea.Genero}}</span>
+                    </li>
+                </ul>
+                <br>
+
+                <form class="form-inline">
+                    <div class="form-group d-flex flex-column">
+                        <label for="usr">Nombre cancion:</label>
+                        <input type="text" class="form-control" id="usr" ng-model="ctrl.nombre">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="sel1">Seleccionar género:</label>
+                        <select class="form-control" id="sel1" ng-model="ctrl.genero">
+                            <option value="Reguetón">Reguetón</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Clásica">Clásica</option>
+                            <option value="Jazz">Jazz</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarMusica()">Agregar</button>
+                </form>
+            </div>
+            <br>
+            <div>
+                <h2>Todas las canciones</h2>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" ng-click="ctrl.order('Nombre')">Nombre</th>
+                            <th scope="col" ng-click="ctrl.order('Autor')">Autor</th>
+                            <th scope="col" ng-click="ctrl.order('Genero')">Genero</th>
+                            <th ng-click="ctrl.order('Duracion')">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="form-group col-lg-4">
+                            <label for="usr">Nombre canción:</label>
+                            <input type="text" class="form-control" ng-model="cancion">
+                            <br>
+                            <label>Filtrar por:</label>
+                            <select class="custom-select" ng-model="select">
+                                <option value="Nombre">Nombre</option>
+                                <option value="Autor">Autor</option>
+                                <option value="Genero">Genero</option>
+                                <option value="Duracion">Duración</option>
+                            </select>
+                        </div>
+                        <tr ng-repeat="x in ctrl.musicas | orderBy:ctrl.myOrder | filter : cancion | orderBy:select">
+                            <td>{{x.Nombre}}</td>
+                            <td>{{x.Autor}}</td>
+                            <td>{{x.Genero}}</td>
+                            <td>{{x.Duracion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
 
 </body>
