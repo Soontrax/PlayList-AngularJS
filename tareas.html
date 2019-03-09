@@ -3,7 +3,6 @@
 <head>
     <title>Controladoeres</title>
 
-
     <!-- Boostrap 4  START-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -22,15 +21,19 @@
     <script src="js/tareas.js"></script>
 </head>
 
-<body ng-app="todoApp" class="container">
+<body ng-app="todoApp" class="container" ng-controller="Controlador as ctrl">
     <div class="row">
 
         <div class="col-md-2 bg-info d-flex flex-column">
             <div class="col mt-5">
-                <img src="img/CANCIONES.png">
+                <a href="" ng-click="canciones=!canciones">
+                    <img src="img/CANCIONES.png">
+                </a>
             </div>
             <div class="col mt-5">
-                <img src="img/lista.png">
+                <a href="" ng-click="lista=!lista">
+                    <img src="img/lista.png">
+                </a>
             </div>
             <div class="col">
                 <img src="img/bbdd_canciones.png">
@@ -39,8 +42,39 @@
         </div>
 
         <div class="col-md-8">
-            <h2>Lista de Canciones</h2>
-            <div ng-controller="Controlador as ctrl">
+            <div ng-show="lista">
+                <h2>PlayLists</h2>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Nº canciones</th>
+                            <th scope="col">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="form-inline mb-5">
+                            <label for="usr">Añadir Playlist: </label>
+                            <input type="text" class="form-control" ng-model="ctrl.lista">
+                            <button class="btn btn-primary" type="submit" ng-click="ctrl.agregarLista()">Añadir</button>
+                        </div>
+                        <tr ng-repeat="i in ctrl.playlist">
+                            <td>{{i.ID}}</td>
+                            <td>{{i.Nombre}}</td>
+                            <td>{{ctrl.playlist.length}}</td>
+                            <td>{{i.Duracion}}</td>
+                            <td></td>
+                            <button class="btn btn-primary" ng-click="canciones=!canciones">Show Songs</button>
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar5()">Delete playlist</button>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div ng-show="canciones">
+                <h2>Lista de Canciones de Musica TOP</h2>
                 <span>Total: {{ctrl.musicas.length}}</span>
                 <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar()">Eliminar</button>
                 <ul class="nav flex-column">
@@ -71,7 +105,7 @@
                 </form>
             </div>
             <br>
-            <div ng-controller="Controlador as ctrl">
+            <div>
                 <h2>Todas las canciones</h2>
 
                 <table class="table">
@@ -86,9 +120,17 @@
                     <tbody>
                         <div class="form-group col-lg-4">
                             <label for="usr">Nombre canción:</label>
-                            <input type="text" class="form-control" id="usr" ng-model="cancion">
+                            <input type="text" class="form-control" ng-model="cancion">
+                            <br>
+                            <label>Filtrar por:</label>
+                            <select class="custom-select" ng-model="select">
+                                <option value="Nombre">Nombre</option>
+                                <option value="Autor">Autor</option>
+                                <option value="Genero">Genero</option>
+                                <option value="Duracion">Duración</option>
+                            </select>
                         </div>
-                        <tr ng-repeat="x in ctrl.musicas | orderBy:ctrl.myOrder | filter : cancion">
+                        <tr ng-repeat="x in ctrl.musicas | orderBy:ctrl.myOrder | filter : cancion | orderBy:select">
                             <td>{{x.Nombre}}</td>
                             <td>{{x.Autor}}</td>
                             <td>{{x.Genero}}</td>
@@ -96,9 +138,6 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <button type="button" class="btn btn-danger" ng-click="ctrl.eliminar5()">-5</button>
-                <button type="button" class="btn btn-success" ng-click="ctrl.agregar5()">+5</button>
 
             </div>
         </div>
